@@ -15,12 +15,21 @@ export const ShoppingPage = () => {
         display: 'flex',
         flexDirection: 'row',
         flexWrap: 'wrap'
-      }}></div>
-      <ProductCard product={product} >
-        <ProductCard.Image />
-        <ProductCard.Title title={'joder'} />
-        <ProductCard.Buttons/>
-      </ProductCard>
+      }}>
+
+        <ProductCard product={product} >
+          <ProductCard.Image />
+          <ProductCard.Title title={'joder'} />
+          <ProductCard.Buttons/>
+        </ProductCard>
+
+        <ProductCard product={product} >
+          <ProductCard.Image />
+          <ProductCard.Title />
+          <ProductCard.Buttons/>
+        </ProductCard>
+      </div>
+
     </div>
   )
 }
