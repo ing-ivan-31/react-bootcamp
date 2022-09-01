@@ -11,3 +11,8 @@ export interface ProductContextProps {
   increaseBy: (value:number) => void;
   product: Product;
 }
+
+export interface onChangeArgs {
+  product: Product;
+  count: number;
+}
