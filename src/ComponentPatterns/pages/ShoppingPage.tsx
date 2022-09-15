@@ -1,8 +1,6 @@
 import ProductCard from "../components";
 import '../styles/custom-styles.css'
 import {Product} from "../interfaces/interfaces";
-import {useState} from "react";
-import {useShoppingCart} from "../hooks/useShoppingCart";
 
 const product = {
   id: '1',
@@ -23,7 +21,6 @@ export interface ProductInCart extends Product {
 }
 
 export const ShoppingPage = () => {
-  const {shoppingCart, onProductCountChange} = useShoppingCart();
 
   return (
     <div>
@@ -34,29 +31,28 @@ export const ShoppingPage = () => {
         flexDirection: 'row',
         flexWrap: 'wrap'
       }}>
+        <ProductCard product={products[0]} initialValues = {{
+          count: 0,
+          maxCount: 10
+        }}>
+          {
+            ({ reset, count, increaseBy, isMaxCountReached }) => (
+              <>
+                <ProductCard.Image />
+                <ProductCard.Title />
+                <ProductCard.Buttons/>
 
-        { products.map((product) => (
-          <ProductCard product={product} onChange={ onProductCountChange} value={shoppingCart[product.id]?.count || 0 } >
-            <ProductCard.Image />
-            <ProductCard.Title />
-            <ProductCard.Buttons/>
-          </ProductCard>
-        )) }
+                <button onClick={reset}>Reset</button>
 
+                <button onClick={() => increaseBy(-2)}>-2</button>
+
+                { !isMaxCountReached && <button onClick={() => increaseBy(+2)}>+2</button> }
+                <span> count: {count}</span>
+              </>
+            )
+          }
+        </ProductCard>
       </div>
-
-      <div className="shopping-cart">
-        {
-          Object.entries(shoppingCart).map(([key, product]) => (
-            <ProductCard key={key} product={product} style={{ width: '100px'}} onChange={onProductCountChange} value={product.count}>
-              <ProductCard.Image />
-              <ProductCard.Buttons />
-            </ProductCard>
-          ))
-        }
-      </div>
-
-      {JSON.stringify(shoppingCart)}
     </div>
   )
 }
