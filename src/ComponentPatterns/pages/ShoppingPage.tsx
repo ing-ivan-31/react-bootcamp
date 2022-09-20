@@ -1,6 +1,6 @@
-import ProductCard from "../components";
 import '../styles/custom-styles.css'
 import {Product} from "../interfaces/interfaces";
+import {ProductCard, ProductImage, ProductTitle, ProductButtons } from 'iesr-product-card'
 
 const product = {
   id: '1',
@@ -41,13 +41,20 @@ export const ShoppingPage = () => {
                 <ProductCard.Image />
                 <ProductCard.Title />
                 <ProductCard.Buttons/>
-
-                <button onClick={reset}>Reset</button>
-
-                <button onClick={() => increaseBy(-2)}>-2</button>
-
-                { !isMaxCountReached && <button onClick={() => increaseBy(+2)}>+2</button> }
-                <span> count: {count}</span>
+              </>
+            )
+          }
+        </ProductCard>
+        <ProductCard product={products[1]} initialValues = {{
+          count: 0,
+          maxCount: 10
+        }}>
+          {
+            ({ reset, count, increaseBy, isMaxCountReached }) => (
+              <>
+                <ProductImage />
+                <ProductTitle />
+                <ProductButtons />
               </>
             )
           }
